@@ -1,0 +1,29 @@
+{
+  "name": "ui",
+  "version": "0.0.1",
+  "description": "The UI for the movie recommendation system",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlmayentry2019/movie-recommendation-system.git"
+  },
+  "keywords": [
+    "movie",
+    "recommendation",
+    "machine",
+    "learning"
+  ],
+  "author": "Thanh Hoang Le",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mlmayentry2019/movie-recommendation-system/issues"
+  },
+  "homepage": "https://github.com/mlmayentry2019/movie-recommendation-system#readme"
+}
