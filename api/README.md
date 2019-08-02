@@ -10,10 +10,9 @@ API for Recommendation system
 
 ```
 cd docker
-docker build -t hoanglt705/movie-recommendation-system:0.1 .
-docker run -d -p 5000:5000 hoanglt705/movie-recommendation-system:0.1
-cd ..
-curl localhost:5000/top_trend -H "Content-Type: application/json"
+docker build -t hoanglt705/movie-recommendation-system-api:0.1 .
+docker run -d -p 5000:5000 hoanglt705/movie-recommendation-system-api:0.1
+curl localhost:5000/top_trend
 ```
 
 ### Usage
@@ -21,7 +20,7 @@ curl localhost:5000/top_trend -H "Content-Type: application/json"
 - Download the docker image from Docker Hub
 
 ```
-docker pull hoanglt705/mlproject01:0.1
-docker run -d -p 5000:5000 hoanglt705/movie-recommendation-system:0.1
-curl localhost:5000/top_trend -H "Content-Type: application/json"
+docker pull hoanglt705/movie-recommendation-system-api:0.1
+docker run -d -p 5000:5000 hoanglt705/movie-recommendation-system-api:0.1
+curl localhost:5000/top_trend
 ```

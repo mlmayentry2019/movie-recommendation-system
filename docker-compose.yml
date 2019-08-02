@@ -1,0 +1,10 @@
+version: '3'
+services:
+  ui:
+    image: hoanglt705/movie-recommendation-system-ui:0.1
+    ports:
+    - "3000:3000"
+  api:
+    image: hoanglt705/movie-recommendation-system-api:0.1
+    ports:
+    - "5000:5000"

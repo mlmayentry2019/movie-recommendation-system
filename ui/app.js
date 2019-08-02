@@ -8,7 +8,7 @@ app.set('views','./views');
 
 app.get('/', async function(req, res) {
    try {
-      var response = await rp("http://localhost:5000/top_trend");
+      var response = await rp("http://api:5000/top_trend");
       obj = JSON.parse(response);
       res.render('home', {name: obj.title});
    } catch(err) {
