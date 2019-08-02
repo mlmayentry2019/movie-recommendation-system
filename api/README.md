@@ -1,6 +1,6 @@
-# ML_project101
+# API Project
 
-SVM web API...
+API for Recommendation system
 
 ## Docker
 
