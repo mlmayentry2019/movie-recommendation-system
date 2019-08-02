@@ -6,6 +6,7 @@ Before running this step, please build docker images for ui and api. How to buil
 Start containers
 ```
 docker-compose up
+curl localhost:3000
 ```
 
 Stop containers
