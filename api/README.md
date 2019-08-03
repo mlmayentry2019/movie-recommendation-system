@@ -12,7 +12,9 @@ API for Recommendation system
 cd docker
 docker build -t hoanglt705/movie-recommendation-system-api:0.1 .
 docker run -d -p 5000:5000 hoanglt705/movie-recommendation-system-api:0.1
+
 curl localhost:5000/top_trend
+curl -X POST -H "Content-Type: application/json" -d '{"title":"Mean Girls"}' http://localhost:5000/content-based
 ```
 
 ### Usage

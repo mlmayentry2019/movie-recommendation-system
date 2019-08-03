@@ -5,8 +5,6 @@ COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
 
-RUN apt-get install --yes python-pip
-RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 COPY . /app
