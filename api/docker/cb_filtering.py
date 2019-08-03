@@ -46,6 +46,8 @@ def cb_filter(md, links_small, credits, keywords):
 
     md = md.drop([19730, 29503, 35587])  # md[md['id'].isnull()]
     md['id'] = md['id'].astype('int')
+    md = md.merge(credits, on='id')
+    md = md.merge(keywords, on='id')
     smd = md[md['id'].isin(links_small)]
 
     # add movive description = overview + tagline
@@ -53,10 +55,10 @@ def cb_filter(md, links_small, credits, keywords):
     smd['description'] = smd['overview'] + smd['tagline']
     smd['description'] = smd['description'].fillna('')
 
-    md = md.merge(credits, on='id')
-    md = md.merge(keywords, on='id')
+    #md = md.merge(credits, on='id')
+    #md = md.merge(keywords, on='id')
 
-    smd = md[md['id'].isin(links_small)]
+    #smd = md[md['id'].isin(links_small)]
 
     # add director, top 3 actors
     smd['cast'] = smd['cast'].apply(literal_eval)
@@ -67,7 +69,7 @@ def cb_filter(md, links_small, credits, keywords):
     smd['director'] = smd['crew'].apply(get_director)
     smd['cast'] = smd['cast'].apply(lambda x: [i['name'] for i in x] if isinstance(x, list) else [])
     smd['cast'] = smd['cast'].apply(lambda x: x[:3] if len(x) >= 3 else x)
-    smd['keywords'] = smd['keywords'].apply(lambda x: [i['name'] for i in x] if isinstance(x, list) else [])
+    #smd['keywords'] = smd['keywords'].apply(lambda x: [i['name'] for i in x] if isinstance(x, list) else [])
 
     # Strip Spaces and Convert to Lowercase from all our features.
     # This way, our engine will not confuse between Johnny Depp and Johnny Galecki.
@@ -92,10 +94,11 @@ def cb_filter(md, links_small, credits, keywords):
                 words.append(i)
         return words
 
-    smd['keywords'] = smd['keywords'].apply(filter_keywords)
-    smd['keywords'] = smd['keywords'].apply(lambda x: [stemmer.stem(i) for i in x])
-    smd['keywords'] = smd['keywords'].apply(lambda x: [str.lower(i.replace(" ", "")) for i in x])
-    smd['soup'] = smd['keywords'] + smd['cast'] + smd['director'] + smd['genres']
+    #smd['keywords'] = smd['keywords'].apply(filter_keywords)
+    #smd['keywords'] = smd['keywords'].apply(lambda x: [stemmer.stem(i) for i in x])
+    #smd['keywords'] = smd['keywords'].apply(lambda x: [str.lower(i.replace(" ", "")) for i in x])
+    #smd['soup'] = smd['keywords'] + smd['cast'] + smd['director'] + smd['genres']
+    smd['soup'] = smd['cast'] + smd['director'] + smd['genres']
     smd['soup'] = smd['soup'].apply(lambda x: ' '.join(x))
 
     count = CountVectorizer(analyzer='word', ngram_range=(1, 2), min_df=0, stop_words='english')

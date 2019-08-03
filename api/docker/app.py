@@ -2,7 +2,13 @@
 import pandas as pd
 from flask import Flask, jsonify, request
 
-from api.docker.cb_filtering import cb_filter
+import sys
+sys.path.append('/app')
+
+#if __name__ == "__main__" and __package__ is None:
+#    __package__ = "app.movie"
+
+from cb_filtering import cb_filter
 
 # Your API definition
 app = Flask(__name__)
