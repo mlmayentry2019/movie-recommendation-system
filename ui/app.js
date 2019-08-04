@@ -16,4 +16,22 @@ app.get('/', async function(req, res) {
    }
 });
 
+app.get('/search', async function(req, res) {
+   const movie = req.query.movie
+   console.log(req.query.movie)
+
+   var options = {
+      method: 'POST',
+      uri: 'http://api:5000/content-based',
+      json: true,
+      body: {
+         title: movie
+     },
+  };
+
+   var response = await rp(options);
+   console.log(response);
+   return res.render('search', {similarMovies: response});
+});
+
 app.listen(3000);

@@ -3,6 +3,9 @@ html(lang='en')
    head
       title="Nextflix"
    body
+      form(method='GET', action='/search')
+         input(type="text" name='movie')
+         button(type='submit') Search
       h1="Top trend"
       table(style='border: 1px solid black;')
          tr(style='border: 1px solid black;')

@@ -1,0 +1,10 @@
+doctype html
+html(lang='en')
+   head
+      title="Nextflix"
+   body
+      h1="More like this"
+      table(style='border: 1px solid black;')
+         tr(style='border: 1px solid black;')
+            each movie in similarMovies
+               td(style='border: 1px solid black;')= movie
