@@ -7,7 +7,8 @@
     "express": "^4.17.1",
     "pug": "^2.0.4",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "request-promise": "^4.2.4",
+    "zuix-dist": "^1.0.3"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"

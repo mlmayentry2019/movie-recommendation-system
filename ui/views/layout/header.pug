@@ -1,0 +1,7 @@
+style
+    include header.css
+#div(class="header" layout="row center-center")
+    div(class="logo" style="display: inline;") WebFlix
+    form(method='GET', action='/search' style="display: inline;")
+        input(type="text" name='movie')
+        button(type='submit') Search

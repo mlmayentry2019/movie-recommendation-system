@@ -1,0 +1,7 @@
+style
+    include more_like_this.css
+h1="More like this"
+div(layout="row top-left" class="gallery")
+    div(class="movie")
+        each movie in similarMovies
+            span(title=val class='item')=movie

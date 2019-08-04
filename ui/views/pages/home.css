@@ -1,0 +1,95 @@
+. {
+    /* temporary hack to test page scroll */
+    /* height: 500vh; */
+    color: white;
+    padding-bottom: 96px;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 120%;
+    text-align: left;
+    margin-top: 28px;
+    margin-left: 8px;
+    margin-bottom: 8px;
+}
+
+.content {
+    position: absolute;
+    top: 0; left: 0;
+    padding-bottom: 56px;
+    width: 100vw;
+    height: 90vh;
+    background-image: linear-gradient(to bottom, rgba(0,0,0, 0.15), transparent 20%, transparent 70%, rgba(0,0,0, 0.5) 80%);
+}
+
+.categories, .options {
+    padding: 8px;
+}
+
+button {
+    padding-left: 6px;
+    padding-right: 16px;
+    font-size: 120%;
+    font-weight: 500;
+    min-height: 38px;
+}
+button div i {
+    margin-right: 6px;
+}
+
+button.flat-btn {
+    border: 0;
+    background: transparent;
+    height: 56px;
+    width: 56px;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+button.flat-btn i {
+    color: white;
+    font-size: 36px;
+    line-height: 56px;
+}
+
+.gallery {
+    width: 100%;
+    height: 180px;
+}
+
+.movie {
+    padding: 4px;
+}
+.movie span.item {
+    display: inline-block;
+    width: 120px;
+    height: 180px;
+    border: solid 1px rgba(255,255,255,.1);
+    background-image: linear-gradient(rgba(0,0,0,0.15) 0, transparent 48px, transparent 40%, black 99%);
+}
+.movie span.item:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.about-box {
+    margin-top: 56px;
+    margin-bottom: 48px;
+    font-size: 140%;
+    font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+    line-height: 160%;
+}
+.about-box p {
+    padding: 12px;
+}
+
+@media only screen and (min-device-width : 720px) {
+    .gallery {
+        height: 231px;
+    }
+    .movie span.item {
+        width: 154px;
+        height: 231px;
+    }
+}
