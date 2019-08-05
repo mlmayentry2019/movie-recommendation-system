@@ -26,6 +26,7 @@ app.get('/search', async function(req, res) {
    const movie = req.query.movie
    var options = {}
    if(userId) {
+      console.log("collaborative");
       options = {
          method: 'POST',
          uri: `http://${host}:5000/collaborative`,
@@ -45,9 +46,13 @@ app.get('/search', async function(req, res) {
          }
       };
    }
-   var response = await rp(options);
-   console.log(response);
-   return res.render('search', {similarMovies: response});
+   try {
+      var response = await rp(options);
+      console.log(response);
+      return res.render('search', {similarMovies: response});
+   } catch(err) {
+      console.error(err)
+   }
 });
 
 app.post('/login', async function(req, res) {

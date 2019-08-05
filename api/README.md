@@ -15,7 +15,7 @@ docker run -d -p 5000:5000 hoanglt705/movie-recommendation-system-api:0.1
 
 curl localhost:5000/top_trend
 curl -X POST -H "Content-Type: application/json" -d '{"title":"Mean Girls"}' http://localhost:5000/content-based
-curl -X POST -H "Content-Type: application/json" -d '{"title":"Mean Girls", "userId": 1}' http://localhost:5000/collaborative
+curl -X POST -H "Content-Type: application/json" -d '{"title":"Avatar", "userId": 1}' http://localhost:5000/collaborative
 ```
 
 ### Usage
