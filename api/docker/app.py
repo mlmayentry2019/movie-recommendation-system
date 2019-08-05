@@ -56,7 +56,7 @@ def hybrid():
     movies['est'] = movies['id'].apply(lambda x: svd.predict(userId, indices_map.loc[x]['movieId']).est)
     movies = movies.sort_values('est', ascending=False)
     #return movies.head(10)
-    movie_titles = (movies.iloc[movie_indices]).head(10)
+    movie_titles = movies.head(10)['title']
     return movie_titles.to_json(orient="records")
 
 if __name__ == '__main__':
