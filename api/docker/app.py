@@ -42,12 +42,12 @@ def hybrid():
     print(json_)
     userId = json_['userId']
     title = json_['title']
-    idx = indices_collab[title]
+    idx = indices[title]
     #tmdbId = id_map.loc[title]['id']
     indices_map = id_map.set_index('id')
     #movie_id = id_map.loc[title]['movieId']
     
-    sim_scores = list(enumerate(cosine_sim_collab[int(idx)]))
+    sim_scores = list(enumerate(cosine_sim[int(idx)]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:26]
     movie_indices = [i[0] for i in sim_scores]
@@ -72,7 +72,7 @@ if __name__ == '__main__':
     titles = smd['title']
     indices = pd.Series(smd.index, index=smd['title'])
 
-    svd, cosine_sim_collab, id_map, indices_collab = collab_filter(df_movie, df_rating, links_small, credits, keywords)
+    svd, id_map = collab_filter(df_rating, links_small, credits, keywords, smd)
 
     #print(hybrid(1, 'Avatar'))
 
