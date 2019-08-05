@@ -7,6 +7,8 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 
+RUN conda install -c conda-forge scikit-surprise
+
 COPY . /app
 
 ENTRYPOINT [ "python" ]
