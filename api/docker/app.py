@@ -9,7 +9,7 @@ sys.path.append('/app')
 #    __package__ = "app.movie"
 
 from cb_filtering import cb_filter
-
+from collaborative_filtering import collab_filter
 # Your API definition
 app = Flask(__name__)
 
@@ -36,6 +36,28 @@ def get_recommendations():
     movie_titles = (titles.iloc[movie_indices]).head(10)
     return movie_titles.to_json(orient="records")
 
+@app.route('/collaborative', methods=['POST'])
+def hybrid():
+    json_ = request.json
+    print(json_)
+    userId = json_['userId']
+    title = json_['title']
+    idx = indices_collab[title]
+    #tmdbId = id_map.loc[title]['id']
+    indices_map = id_map.set_index('id')
+    #movie_id = id_map.loc[title]['movieId']
+    
+    sim_scores = list(enumerate(cosine_sim_collab[int(idx)]))
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    sim_scores = sim_scores[1:26]
+    movie_indices = [i[0] for i in sim_scores]
+    
+    movies = smd.iloc[movie_indices][['title', 'vote_count', 'vote_average', 'year', 'id']]
+    movies['est'] = movies['id'].apply(lambda x: svd.predict(userId, indices_map.loc[x]['movieId']).est)
+    movies = movies.sort_values('est', ascending=False)
+    #return movies.head(10)
+    movie_titles = (movies.iloc[movie_indices]).head(10)
+    return movie_titles.to_json(orient="records")
 
 if __name__ == '__main__':
     df_rating = pd.read_csv('./data/ratings_small.csv')
@@ -49,5 +71,9 @@ if __name__ == '__main__':
     smd = smd.reset_index()
     titles = smd['title']
     indices = pd.Series(smd.index, index=smd['title'])
+
+    svd, cosine_sim_collab, id_map, indices_collab = collab_filter(df_movie, df_rating, links_small, credits, keywords)
+
+    #print(hybrid(1, 'Avatar'))
 
     app.run(debug=True, host='0.0.0.0')
