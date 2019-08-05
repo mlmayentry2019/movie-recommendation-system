@@ -74,11 +74,12 @@ if __name__ == '__main__':
     keywords = pd.read_csv('./data/keywords.csv')
 
     smd, cosine_sim = cb_filter(df_movie, links_small, credits, keywords)
+    
+    svd, id_map = collab_filter(df_movie, df_rating, links_small, credits, keywords, smd)
+
     smd = smd.reset_index()
     titles = smd['title']
     indices = pd.Series(smd.index, index=smd['title'])
-
-    svd, id_map = collab_filter(df_rating, links_small, credits, keywords, smd)
 
     #print(hybrid(1, 'Avatar'))
     app.run(debug=True, host='0.0.0.0')

@@ -25,25 +25,25 @@ app.get('/', async function(req, res) {
 app.get('/search', async function(req, res) {
    const movie = req.query.movie
    var options = {}
-   if(userId == null) {
+   if(userId) {
+      options = {
+         method: 'POST',
+         uri: `http://${host}:5000/collaborative`,
+         json: true,
+         body: {
+            userId: userId,
+            title: movie
+         }
+      };
+   } else {
       options = {
          method: 'POST',
          uri: `http://${host}:5000/content-based`,
          json: true,
          body: {
-            title: movie
-        }
-     };
-   } else {
-      options = {
-          method: 'POST',
-          uri: `http://${host}:5000/collaborative`,
-          json: true,
-          body: {
-             userId: userId,
-             title: movie
-          }
-       };
+         title: movie
+         }
+      };
    }
    var response = await rp(options);
    console.log(response);
@@ -52,6 +52,18 @@ app.get('/search', async function(req, res) {
 
 app.post('/login', async function(req, res) {
    userId = req.body.userId
+   //TODO use forward instead of copy/paste
+   try {
+      var response = await rp(`http://${host}:5000/top_trend`);
+      obj = JSON.parse(response);
+      res.render('index', {name: obj.title});
+   } catch(err) {
+      console.error(err)
+   }
+});
+
+app.get('/logout', async function(req, res) {
+   userId = ''
    //TODO use forward instead of copy/paste
    try {
       var response = await rp(`http://${host}:5000/top_trend`);

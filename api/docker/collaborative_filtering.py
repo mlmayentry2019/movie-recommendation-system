@@ -25,7 +25,7 @@ def get_director(x):
             return i['name']
     return np.nan
 
-def collab_filter(ratings, links_small, credits, keywords, smd):
+def collab_filter(md, ratings, links_small, credits, keywords,smd):
     # data pre-processing
     id_map = links_small[['movieId', 'tmdbId']]
     links_small = links_small[links_small['tmdbId'].notnull()]['tmdbId'].astype('int')
