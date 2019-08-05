@@ -60,13 +60,19 @@ def hybrid():
     return movie_titles.to_json(orient="records")
 
 if __name__ == '__main__':
+    print('Loading ratings_small..')
     df_rating = pd.read_csv('./data/ratings_small.csv')
+    print('Loading movies_metadata..')
     df_movie = pd.read_csv('./data/movies_metadata.csv')
 
     # content-based filtering
+    print('Loading links_small..')
     links_small = pd.read_csv('./data/links_small.csv')
+    print('Loading credits..')
     credits = pd.read_csv('./data/credits.csv')
+    print('Loading keywords..')
     keywords = pd.read_csv('./data/keywords.csv')
+
     smd, cosine_sim = cb_filter(df_movie, links_small, credits, keywords)
     smd = smd.reset_index()
     titles = smd['title']
@@ -75,5 +81,4 @@ if __name__ == '__main__':
     svd, id_map = collab_filter(df_rating, links_small, credits, keywords, smd)
 
     #print(hybrid(1, 'Avatar'))
-
     app.run(debug=True, host='0.0.0.0')
