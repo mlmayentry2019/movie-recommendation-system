@@ -1,15 +1,11 @@
 # Dependencies
+import joblib
 import pandas as pd
 from flask import Flask, jsonify, request
 
 import sys
 sys.path.append('/app')
 
-#if __name__ == "__main__" and __package__ is None:
-#    __package__ = "app.movie"
-
-from cb_filtering import cb_filter
-from collaborative_filtering import collab_filter
 # Your API definition
 app = Flask(__name__)
 
@@ -46,12 +42,12 @@ def hybrid():
     #tmdbId = id_map.loc[title]['id']
     indices_map = id_map.set_index('id')
     #movie_id = id_map.loc[title]['movieId']
-    
+
     sim_scores = list(enumerate(cosine_sim[int(idx)]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:26]
     movie_indices = [i[0] for i in sim_scores]
-    
+
     movies = smd.iloc[movie_indices][['title', 'vote_count', 'vote_average', 'year', 'id']]
     movies['est'] = movies['id'].apply(lambda x: svd.predict(userId, indices_map.loc[x]['movieId']).est)
     movies = movies.sort_values('est', ascending=False)
@@ -66,16 +62,13 @@ if __name__ == '__main__':
     df_movie = pd.read_csv('./data/movies_metadata.csv')
 
     # content-based filtering
-    print('Loading links_small..')
-    links_small = pd.read_csv('./data/links_small.csv')
-    print('Loading credits..')
-    credits = pd.read_csv('./data/credits.csv')
-    print('Loading keywords..')
-    keywords = pd.read_csv('./data/keywords.csv')
-
-    smd, cosine_sim = cb_filter(df_movie, links_small, credits, keywords)
+    # smd, cosine_sim = cb_filter(df_movie, links_small, credits, keywords)
+    smd = joblib.load("./smd.pkl")
+    cosine_sim = joblib.load("./cosine_sim.pkl")
     
-    svd, id_map = collab_filter(df_movie, df_rating, links_small, credits, keywords, smd)
+    # svd, id_map = collab_filter(df_movie, df_rating, links_small, credits, keywords, smd)
+    svd = joblib.load("./svd.pkl")
+    id_map = joblib.load("./id_map.pkl")
 
     smd = smd.reset_index()
     titles = smd['title']
