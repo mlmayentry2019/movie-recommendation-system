@@ -16,7 +16,8 @@ app.get('/', async function(req, res) {
    try {
       var response = await rp(`http://${host}:5000/top_trend`);
       obj = JSON.parse(response);
-      res.render('index', {name: obj.title});
+      var logined = userId ? true : false;
+      res.render('index', {name: obj.title, logined: logined});
    } catch(err) {
       console.error(err)
    }
@@ -49,7 +50,8 @@ app.get('/search', async function(req, res) {
    try {
       var response = await rp(options);
       console.log(response);
-      return res.render('search', {similarMovies: response});
+      var logined = userId ? true : false;
+      return res.render('search', {similarMovies: response, logined: logined});
    } catch(err) {
       console.error(err)
    }
@@ -61,7 +63,8 @@ app.post('/login', async function(req, res) {
    try {
       var response = await rp(`http://${host}:5000/top_trend`);
       obj = JSON.parse(response);
-      res.render('index', {name: obj.title});
+      var logined = userId ? true : false;
+      res.render('index', {name: obj.title, logined: logined});
    } catch(err) {
       console.error(err)
    }
@@ -73,7 +76,8 @@ app.get('/logout', async function(req, res) {
    try {
       var response = await rp(`http://${host}:5000/top_trend`);
       obj = JSON.parse(response);
-      res.render('index', {name: obj.title});
+      var logined = userId ? true : false;
+      res.render('index', {name: obj.title, logined: logined});
    } catch(err) {
       console.error(err)
    }

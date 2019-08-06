@@ -2,11 +2,15 @@ style
     include header.css
 #div(class="header" layout="row center-center")
     div(class="logo" style="display: inline;") WebFlix
-    form(method='GET', action='/search' style="display: inline;")
-        input(type="text" name='movie')
-        button(type='submit') Search
-    form(method='POST', action='/login' style="display: inline;")
-        input(type="text" name='userId')
-        button(type='submit') Login
-    form(method='GET', action='/logout' style="display: inline")
-        button(type='submit') Logout
+    div(style="position: relative; float: right; display: inline; margin-right: 10px;")
+        form(method='GET', action='/search' style="display: inline;")
+            input(type="text" name='movie')
+            button(type='submit')
+                i(class="material-icons md-18") search
+        if logined
+            form(method='GET', action='/logout' style="display: inline")
+                button(type='submit' class="btn-red") Logout
+        else
+            form(method='POST', action='/login' style="display: inline;")
+                input(type="text" name='userId' style="margin-right: 3px;")
+                button(type='submit' class="btn-red") Login
