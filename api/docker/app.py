@@ -2,6 +2,7 @@
 import joblib
 import pandas as pd
 from flask import Flask, jsonify, request
+from top_trend import top_movies
 
 import sys
 sys.path.append('/app')
@@ -12,12 +13,7 @@ app = Flask(__name__)
 
 @app.route('/top_trend', methods=['GET'])
 def topTrend():
-    top_rating = df_rating.nlargest(20, ['rating', 'timestamp'])
-    top_rating_list = top_rating['movieId'].astype(str).tolist()
-
-    df_movie['id'] = df_movie['id'].astype(str)
-    top_trend_movies = df_movie[df_movie['id'].isin(top_rating_list)]
-    return top_trend_movies.to_json()
+    return top_movies(df_movie).to_json()
 
 
 @app.route('/content-based', methods=['POST'])
