@@ -5,12 +5,14 @@ COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
 
-RUN pip install -r requirements.txt
+RUN /opt/conda/bin/pip install -r requirements.txt
 
-RUN conda install -c conda-forge scikit-surprise
+RUN /opt/conda/bin/conda install -c conda-forge scikit-surprise
 
 COPY . /app
 
-ENTRYPOINT [ "python" ]
+RUN /opt/conda/bin/python models.py
+
+ENTRYPOINT [ "/opt/conda/bin/python" ]
 
 CMD [ "app.py" ]

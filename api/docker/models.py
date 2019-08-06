@@ -5,8 +5,8 @@ import os
 cwd = os.getcwd()
 print(cwd)
 
-from api.docker.cb_filtering import cb_filter
-from api.docker.collaborative_filtering import collab_filter
+from cb_filtering import cb_filter
+from collaborative_filtering import collab_filter
 
 print('Loading ratings_small..')
 
