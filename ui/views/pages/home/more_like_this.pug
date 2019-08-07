@@ -5,5 +5,5 @@ div(layout="row top-left" class="gallery")
     div(class="movie")
         each movie in similarMovies
             span(title=val class='item' 
-            style='background-size: cover; background-position-x: 50%; background-image: url("https://gitlab.com/dinhhieuho/movierecommendationsystem/raw/master/images/'+movie.replace(':','-')+'.png");')=movie 
+            style='background-size: cover; background-position-x: 50%; background-image: url("https://gitlab.com/dinhhieuho/movierecommendationsystem/raw/master/images/'+movie.replace("'","-").replace(':','-')+'.png");')=movie 
             
