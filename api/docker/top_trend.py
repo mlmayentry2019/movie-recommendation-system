@@ -28,6 +28,6 @@ def top_movies(md):
 
     qualified['wr'] = qualified.apply(weighted_rating, axis=1)
 
-    qualified = qualified.sort_values('wr', ascending=False).head(250)
+    qualified = qualified.sort_values('wr', ascending=False).head(10)
 
     return qualified

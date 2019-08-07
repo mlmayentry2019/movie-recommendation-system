@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 @app.route('/top_trend', methods=['GET'])
 def topTrend():
-    return top_movies(df_movie).to_json()
+    return top_movies(df_movie.copy()).to_json()
 
 
 @app.route('/content-based', methods=['POST'])
