@@ -5,4 +5,4 @@ div(layout="row top-left" class="gallery")
     div(class="movie")
         each val in name
             span(title=val class='item' 
-            style='background-size: cover; background-position-x: 50%; background-image: url("https://gitlab.com/dinhhieuho/movierecommendationsystem/raw/master/images/'+val+'.png");')=val 
+            style='background-size: cover; background-position-x: 50%; background-image: url("https://gitlab.com/dinhhieuho/movierecommendationsystem/raw/master/images/'+val.replace("'","-").replace(':','-')+'.png");')=val 
