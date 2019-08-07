@@ -3,7 +3,7 @@ var app = express();
 var rp = require('request-promise');
 var bodyParser = require("body-parser");
 
-const host = 'api';
+const host = process.env.HOST ? process.env.HOST : 'api';
 var userId = ''
 
 app.use(bodyParser.urlencoded({ extended: false }));
